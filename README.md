@@ -1,2 +1,2 @@
 # ci4-anime-api
-Anime API developed usign CodeIgniter 4
+Anime API developed using CodeIgniter 4
