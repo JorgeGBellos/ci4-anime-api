@@ -17,17 +17,19 @@ class Anime extends BaseController
         echo json_encode($animes);
         //var_dump($animes);
     }
-    /*
-    Endpoints needed consuption only
 
-        - GET ALL ANIMES
-        - GET ANIME BY ID 
-        - GET LIST OF GENRES
+    /*
+    Endpoints needed comsuption only
+
+        - GET ALL ANIMES (ready)
+        - GET ANIME BY ID (ready)
+        - GET LIST OF GENRES 
         - GET ANIMES BY GENRES
         - GET ANIMES BY TYPE
         - GET ANIMES WITH RANGE OF SCORE
     */
     //Limit will be <=10
+    //limit and page will be always needed both
 
     //    offset = (page - 1) * page_size
     //    limit = page_size
@@ -38,17 +40,23 @@ class Anime extends BaseController
         $limit = $this->request->getGet('limit');
         $page = $this->request->getGet('page');
 
-        if($this->validateParams($limit,$page)){
-            $offset = ($page - 1) * $limit;
-            $query   = $this->builder->get($limit,$offset);
-            $animes = $query->getResult();
-            return $this->response->setJSON(json_encode($animes));
+        if(!isset($limit) && !isset($page)){
+            $this->response->setStatusCode(200, "Here you have all the animes");
+            $this->response->setBody(json_encode($animes));
         }else{
-            return $this->response->setJSON(json_encode($animes));
+            
+            if($this->validateParams($limit,$page)){
+                $offset = ($page - 1) * $limit;
+                $query   = $this->builder->get($limit,$offset);
+                $animesFiltered = $query->getResult();
+                $this->response->setStatusCode(200,"The animes were filtered");
+                $this->response->setBody(json_encode($animesFiltered));
+            }else{
+                $this->response->setStatusCode(204,"No animes to show");
+                $this->response->setBody(json_encode($animes));
+            }
         }
-        //$query   = $this->builder->get();
-        //echo json_encode($animes);
-        //var_dump($query->getResult());
+        return $this->response;
     }
     
     //validate only limit and page params
@@ -67,6 +75,13 @@ class Anime extends BaseController
 
         return false;
     }
+
+    private function buildResponse($code, $message, $body, $response){
+        $response->setStatusCode($code,$message);
+        $response->setBody(json_encode($body));
+        return $response;
+    }
+
     private function applyOffset($array, $page){
 
     }

@@ -255,3 +255,45 @@ in APPPATH\Controllers\Anime.php on line 60.
  5 SYSTEMPATH\CodeIgniter.php(486): CodeIgniter\CodeIgniter->startController()
  6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-06-17 17:25:53 --> syntax error, unexpected token "{"
+in APPPATH\Controllers\Anime.php on line 54.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(289): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\ci4-anime-api\\app\\Controllers\\Anime.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(267): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Anime')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Anime')
+ 4 SYSTEMPATH\CodeIgniter.php(892): class_exists('\\App\\Controllers\\Anime', true)
+ 5 SYSTEMPATH\CodeIgniter.php(486): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-06-17 17:26:50 --> json_encode() expects at least 1 argument, 0 given
+in APPPATH\Controllers\Anime.php on line 54.
+ 1 APPPATH\Controllers\Anime.php(54): json_encode()
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Anime->getAllAnimes()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anime))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-06-17 17:27:11 --> Undefined constant "App\Controllers\s"
+in APPPATH\Controllers\Anime.php on line 54.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Anime->getAllAnimes()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anime))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-06-17 17:27:51 --> Call to undefined function App\Controllers\json()
+in APPPATH\Controllers\Anime.php on line 54.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Anime->getAllAnimes()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anime))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-06-17 17:41:19 --> Too few arguments to function CodeIgniter\HTTP\Message::setBody(), 0 passed in C:\xampp\htdocs\ci4-anime-api\app\Controllers\Anime.php on line 56 and exactly 1 expected
+in SYSTEMPATH\HTTP\MessageTrait.php on line 52.
+ 1 APPPATH\Controllers\Anime.php(56): CodeIgniter\HTTP\Message->setBody()
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Anime->getAllAnimes()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anime))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-06-17 17:46:58 --> Undefined variable $animesFiltered
+in APPPATH\Controllers\Anime.php on line 56.
+ 1 APPPATH\Controllers\Anime.php(56): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $animesFiltered', 'C:\\xampp\\htdocs\\ci4-anime-api\\app\\Controllers\\Anime.php', 56)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Anime->getAllAnimes()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Anime))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
