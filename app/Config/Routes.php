@@ -31,6 +31,9 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Anime::index');
 
+$routes->get('/anime/(:num)','Anime::getAnime/$1');
+$routes->get('/anime','Anime::getAllAnimes');
+
 
 /*
  * --------------------------------------------------------------------

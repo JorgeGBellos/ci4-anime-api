@@ -36,7 +36,9 @@ abstract class BaseController extends Controller
      * @var array
      */
     protected $helpers = [];
-
+    protected $animeModel;
+    protected $db;
+    protected $builder;
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
@@ -54,5 +56,9 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+        $this->request = $request;
+        $this->animeModel = new \App\Models\Anime();
+        $this->db =  \Config\Database::connect();
+        $this->builder = $this->db->table('anime');
     }
 }
