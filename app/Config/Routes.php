@@ -34,6 +34,8 @@ $routes->get('/', 'Anime::index');
 $routes->get('/anime/(:num)','Anime::getAnime/$1');
 $routes->get('/anime','Anime::getAllAnimes');
 
+$routes->get('/genre','Anime::getAllGenres');
+//$routes->get('/anime','Anime::getAllAnimes');
 
 /*
  * --------------------------------------------------------------------
