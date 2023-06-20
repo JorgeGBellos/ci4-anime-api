@@ -38,7 +38,7 @@ class Anime extends BaseController
 
         - GET ALL ANIMES (ready)
         - GET ANIME BY ID (ready)
-        - GET LIST OF GENRES 
+        - GET LIST OF STUDIOS
         - GET ANIMES BY GENRES
         - GET ANIMES BY TYPE
         - GET ANIMES WITH RANGE OF SCORE
@@ -73,12 +73,15 @@ class Anime extends BaseController
         return $this->response;
     }
     
-    public function getAllGenres(){
+    public function getAllStudios(){
 
-        $this->builder->select('Genre');
+        $this->builder->select('Studio');
         $query = $this->builder->get();
-        echo '<pre>'; print_r($query->getResultArray()); echo '</pre>';
-
+        $studios = $this->generateStudios($query->getResultArray());
+        $this->response->setStatusCode(200,"Aquí tienes tus estudios");
+        $this->response->setBody(json_encode($studios));
+        
+        return $this->response;
     }
 
     //validate only limit and page params
@@ -101,5 +104,19 @@ class Anime extends BaseController
             //throw $th;
             return false;
         }
+    }
+
+    private function generateStudios($array){
+        
+        $studios = [];
+        foreach ($array as $key => $element) {
+            if(!array_key_exists($element['Studio'], $studios)){
+                $studios[$element['Studio']]['count'] = 1;
+            }else{
+                $studios[$element['Studio']]['count']++;
+            }
+        }
+        
+        return $studios;
     }
 }
