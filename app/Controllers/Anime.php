@@ -12,6 +12,7 @@ class Anime extends BaseController
     
     // .../anime/$id
     public function getAnime($id){
+
         $total = $this->animeModel->findAll();
         $animes['content'] = $this->animeModel->where('Rank', $id)->findAll();
 
@@ -75,9 +76,9 @@ class Anime extends BaseController
     
     public function getAllStudios(){
 
-        $this->builder->select('Studio');
-        $query = $this->builder->get();
-        $studios = $this->generateStudios($query->getResultArray());
+        $animes = $this->animeModel->findAll();
+        $studios = $this->generateStudios($animes);
+
         $this->response->setStatusCode(200,"Aquí tienes tus estudios");
         $this->response->setBody(json_encode($studios));
         
@@ -105,18 +106,27 @@ class Anime extends BaseController
             return false;
         }
     }
-
+    
     private function generateStudios($array){
         
         $studios = [];
         foreach ($array as $key => $element) {
             if(!array_key_exists($element['Studio'], $studios)){
                 $studios[$element['Studio']]['count'] = 1;
+                $studios[$element['Studio']]['scoreAvg'] = $element['Score'];
             }else{
                 $studios[$element['Studio']]['count']++;
+                $studios[$element['Studio']]['scoreAvg'] = $studios[$element['Studio']]['scoreAvg'] + $element['Score'];
             }
+            $studios[$element['Studio']]['animes'][] = $element['Title'];
+
         }
-        
+            
+        foreach ($studios as &$element) {
+            $element['scoreAvg'] = round($element['scoreAvg']/$element['count'],2);
+        }
+
         return $studios;
     }
+
 }
