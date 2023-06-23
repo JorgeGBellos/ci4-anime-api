@@ -85,6 +85,43 @@ class Anime extends BaseController
         return $this->response;
     }
 
+    private function insertStudios(){
+        $animes = $this->animeModel->findAll();
+        $studios = [];
+        $final = [];
+        foreach ($animes as $key => $value) {
+            $studios[] = $value['Studio'];
+        }
+        //echo json_encode($genres);
+        foreach ($studios as $key => $value) {
+            //$palabras = str_word_count($value, 1);
+            $palabras = array_map('trim', explode(',', $value));
+            //echo json_encode($frasesSeparadasPorComas);
+            foreach ($palabras as $palabra) {
+                $clean = ltrim($palabra);
+                $cleanString = str_replace("\u{00A0}", "", $clean);
+                //echo $finalStr."<br>";
+                if(!in_array($cleanString,$final)){
+                    $final[] = $cleanString;
+                }
+            }
+        }
+        foreach ($final as $key => $value) {
+            $animes = $this->animeModel->like('Studio', $value)->findAll();
+            $score = 0;
+            foreach ($animes as $keyAnime => $valueAnime) {
+                $score += $valueAnime['Score'];
+            }
+            $score = $score / count($animes);
+            $data = [
+                'title' => $value,
+                'count' => count($animes),
+                'ScoreAvg' => round($score,2),
+                'content' => json_encode($animes)
+            ];
+            $this->studioModel->insert($data);
+        }
+    }
     //validate only limit and page params
     private function validateParams($limit,$page){
         //limit should be <=10

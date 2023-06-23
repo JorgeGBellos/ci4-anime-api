@@ -37,6 +37,8 @@ abstract class BaseController extends Controller
      */
     protected $helpers = [];
     protected $animeModel;
+    protected $genreModel;
+    protected $studioModel;
     protected $db;
     protected $builder;
     /**
@@ -59,6 +61,8 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
         $this->request = $request;
         $this->animeModel = new \App\Models\Anime();
+        $this->genreModel = new \App\Models\Genre();
+        $this->studioModel = new \App\Models\Studio();
         $this->db =  \Config\Database::connect();
         $this->builder = $this->db->table('anime');
     }
